@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="loginStyle.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="center">
+                <h1>Login</h1>
+            <form onsubmit="log(event)">
+            <div class="txt_field">
+                <label>Enter email</label>
+                <span></span>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="txt_field">
+                <label for="pass">password</label>
+                <span></span>
+                <input type="password" id="pass" name="pass">
+            </div>
+            <div class="password_link">
+            <a href="password/passwod.html">forget Password?</a>
+            </div>
+            <input type="submit" value="login">
+            <div class="signup_link">
+                Not a Member ? <a href="signup.html">Signup</a>
+            </div>
+        </form>
+
+        
+        <!-- <a href="signup.html">New user? - Register</a> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+        <script src="index.js"></script>
+            </div>
+        </div>
+    </body>
+</html>
