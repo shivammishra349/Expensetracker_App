@@ -1,10 +1,8 @@
 let express=require('express')
 
-let helmet = require('helmet')
+let fs= require('fs')
 
-let compression = require('compression')
-
-let morgan = require('morgan')
+let path = require('path')
 
 require('dotenv').config()
 
@@ -24,6 +22,7 @@ const cors=require('cors');
 
 let app=express();
 
+
 let userRoute = require('./routes/user')
 
 let expenseRoute =require('./routes/expense')
@@ -38,22 +37,17 @@ app.use(cors());
 
 app.use(express.json())
 
-app.use('/user',userRoute)
 
-app.use('/expense',expenseRoute)
+app.use('/user', userRoute);
+app.use('/expense', expenseRoute);
+app.use('/purchase', purchaseRoute);
+app.use('/premium', primumRoute);
+app.use('/password', passwordRoute);
 
-app.use('/purchase' , purchaseRoute)
-
-app.use('/premium' , primumRoute)
-
-app.use('/password', passwordRoute)
-
-app.use(helmet())
-
-app.use(compression())
-
-app.use(morgan('combined', { stream: process.stdout }))
-
+app.use((req,res)=>{
+    console.log('url', req.url)
+    res.sendFile(path.join(__dirname , `public/${req.url}`))
+})
 user.hasMany(expense)
 expense.belongsTo(user)
 
@@ -68,6 +62,7 @@ url.belongsTo(user)
 
 sequelize.sync()
     .then(()=>{
+        // console.log(process.env.port)
         app.listen(process.env.port)
     })
     .catch((err)=>{
